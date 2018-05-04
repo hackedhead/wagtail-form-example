@@ -7,6 +7,8 @@ from wagtail.wagtailcore.models import Page
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailadmin.edit_handlers import FieldPanel
 
+from cars.models import CarDetail
+
 
 class IceCreamFlavour(models.Model):
     flavour_name = models.CharField(max_length=255)
@@ -30,6 +32,7 @@ class FlavourSuggestionPage(Page):
 
     def serve(self, request):
         from flavours.forms import FlavourSuggestionForm
+        car_count = CarDetail.objects.count()
 
         if request.method == 'POST':
             form = FlavourSuggestionForm(request.POST)
